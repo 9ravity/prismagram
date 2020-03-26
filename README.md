@@ -2,6 +2,8 @@
 
 express + prisma + react + react native
 
+start 1. node : yarn dev 2. node : yarn prisma
+
 ## User Stories
 
 ### front end
