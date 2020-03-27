@@ -3,10 +3,12 @@ type User {
   username: String!
   email: String!
   firstName: String
+  fullName: String
   lastName: String
   bio: String
   following: [User!]!
   followers: [User!]!
+  amIFollowing: Boolean!
   posts: [Post!]!
   likes: [Like!]!
   comments: [Comment!]!
@@ -21,6 +23,7 @@ type Post {
   caption: String!
   likes: [Like!]!
   comments: [Comment!]!
+  isLiked: Boolean!
 }
 type Like {
   id: ID!
@@ -52,4 +55,9 @@ type Message {
   from: User!
   to: User!
   room: Room!
+}
+
+type UserProfile {
+  user: User!
+  posts: [Post!]!
 }
