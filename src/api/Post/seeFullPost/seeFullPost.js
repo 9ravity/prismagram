@@ -8,19 +8,11 @@ export default {
       isAuthenticated(request);
       const { id } = args;
       const post = await prisma.post({ id });
-      const comments = await prisma
-        .post({ id })
-        .comments()
-        .$fragment(COMMENT_FRAGMENT);
-      const likeNum = await prisma
-        .likesConnection({ where: { post: { id } } })
-        .aggregate()
-        .count();
-      console.log(likeNum);
+
       return {
         post,
         comments,
-        likeCount: likeNum
+        files
       };
     }
   }
