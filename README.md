@@ -4,6 +4,8 @@ express + prisma + react + react native
 
 start 1. node : yarn dev 2. node : yarn prisma
 
+login - confirmSecret
+
 ## User Stories
 
 ### front end
