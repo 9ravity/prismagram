@@ -6,7 +6,9 @@ import schema from "./schema";
 import "./passport"; // passport 모듈 내부적으로 실행
 import { authenticatedJwt } from "./passport";
 
-const PORT = process.env.PORT || 3000;
+const DEFAULT_PORT = 4000;
+
+const PORT = process.env.PORT || DEFAULT_PORT;
 
 const server = new GraphQLServer({
   schema,

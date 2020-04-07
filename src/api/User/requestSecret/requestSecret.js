@@ -10,7 +10,7 @@ export default {
       try {
         const result = await prisma.updateUser({
           data: { loginSecret },
-          where: { email }
+          where: { email },
         });
         if (result) {
           await sendSecretMail(email, loginSecret);
@@ -22,6 +22,6 @@ export default {
         console.log(error);
         return false;
       }
-    }
-  }
+    },
+  },
 };
