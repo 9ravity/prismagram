@@ -1,6 +1,10 @@
 import { adjectives, nouns } from "./words";
 import nodeMailer from "nodemailer";
 import jwt from "jsonwebtoken";
+import smtpTransport from "nodemailer-smtp-transport";
+
+const MAIL_SERVICE = "gmail";
+const MAIL_HOST = "smtp.gmail.com";
 
 export const generateSecret = () => {
   const randomNumber = Math.floor(Math.random() * adjectives.length);
@@ -12,23 +16,22 @@ export const sendSecretMail = (adress, secret) => {
     from: process.env.SYS_EMAIL,
     to: adress,
     subject: "💥 Login Secret for gram 💥",
-    html: `Hello! your secret is <strong>${secret}.</strong><br/> Copy paste on the Websited/app to login`
+    html: `Hello! your secret is <strong>${secret}.</strong><br/> Copy paste on the Websited/app to login`,
   };
   return sendMail(email);
 };
 
-const sendMail = email => {
-  const client = nodeMailer.createTransport({
-    service: "Gmail",
-    prot: 587,
-    host: "smtp.gmlail.com",
-    secure: false,
-    requireTLS: true,
-    auth: {
-      user: process.env.SYS_EMAIL,
-      pass: process.env.SYS_PASS
-    }
-  });
+const sendMail = (email) => {
+  const client = nodeMailer.createTransport(
+    smtpTransport({
+      service: MAIL_SERVICE,
+      host: MAIL_HOST,
+      auth: {
+        user: process.env.SYS_EMAIL,
+        pass: process.env.SYS_PASS,
+      },
+    })
+  );
   return client.sendMail(email, function(error, info) {
     if (error) {
       console.log(error);
@@ -39,6 +42,6 @@ const sendMail = email => {
 };
 
 //토큰 생성
-export const generateToken = id => {
+export const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
 };
