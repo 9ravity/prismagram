@@ -1,6 +1,6 @@
 type User {
   id: ID! @id
-  avatar:String
+  avatar:String @default(value:"https://www.shutterstock.com/ko/blog/wp-content/uploads/sites/17/2018/02/shutterstock_244963138.jpg?w=760&h=513")
   username: String! @unique
   email: String! @unique
   firstName: String @default(value: "")
