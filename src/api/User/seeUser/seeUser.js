@@ -5,8 +5,8 @@ export default {
   Query: {
     seeUser: async (_, args) => {
       // 공개된 userProfile -> 인증 필요없음
-      const { id } = args;
-      return prisma.user({ id });
-    }
-  }
+      const { username } = args;
+      return prisma.user({ username });
+    },
+  },
 };
